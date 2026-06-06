@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Toggle</title>
+    <style>
+        /* Default Light Mode Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            text-align: center;
+        }
+        .toggle-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 2px solid #333;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="main-heading">Light Mode Active</h1>
+        <p>Click the button below to switch the theme of this page.</p>
+        <button class="toggle-btn">Switch Theme</button>
+    </div>
+
+    <script>
+        // 🛠️ YOUR JAVASCRIPT MISSION:
+
+        let body = document.body;
+        let heading=document.querySelector("#main-heading");
+        let themeButton=document.querySelector(".toggle-btn");
+        
+        // 1. Select the <body> tag, the <h1> tag, and the <button>
+        //    Hint: To grab the body, you can just use: let body = document.body;
+
+        themeButton.addEventListener ('click', function() {
+            if (body.style.backgroundColor == "rgb(255, 255, 255)"){
+                body.style.color= '#ffffff';
+                heading.textContent = "Dark Mode Active";
+                body.style.backgroundColor = '#222222';
+            } else {
+                body.style.color= '#333333';
+                heading.textContent = "Light Mode Active";
+                body.style.backgroundColor = '#ffffff';
+            }
+        }) 
+        
+        // 2. Add a click event listener to the button.
+        
+        // 3. Inside the click function, write an if/else statement.
+        //    Check if the body's background color is currently white ("rgb(255, 255, 255)" or "#ffffff").
+        
+        //    If it is white:
+        //    - Change body.style.backgroundColor to "#222222" (Dark grey)
+        //    - Change body.style.color to "#ffffff" (White text)
+        //    - Change the heading's textContent to "Dark Mode Active"
+        
+        //    Else:
+        //    - Turn the background back to "#ffffff"
+        //    - Turn the text color back to "#333333"
+        //    - Change the heading's textContent back to "Light Mode Active"
+
+    </script>
+</body>
+</html>
