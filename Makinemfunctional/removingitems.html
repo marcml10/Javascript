@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Shopping List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .list-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            width: 320px;
+        }
+
+        h3 {
+            margin-top: 0;
+            color: #333;
+            text-align: center;
+            font-size: 22px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        p {
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #shopping-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background-color: #f1f3f5;
+            color: #495057;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            /* Prevents the text from being highlighted accidentally on double clicks */
+            user-select: none; 
+        }
+
+        /* Hover effect to show the user they can delete it */
+        .item:hover {
+            background-color: #ffe3e3;
+            color: #e03131;
+            transform: translateX(4px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="list-card">
+        <h3>Shopping List</h3>
+        <p>💡 Click any item below to remove it from the list</p>
+        
+        <ul id="shopping-list">
+            <li class="item">🍎 Fresh Apples</li>
+            <li class="item">🍌 Ripe Bananas</li>
+            <li class="item">🥛 Whole Milk</li>
+            <li class="item">🍞 Sourdough Bread</li>
+            <li class="item">☕ Dark Roast Coffee</li>
+        </ul>
+    </div>
+
+    <script>
+        // 1. Select ALL elements with the class 'item' (Returns a NodeList)
+        let items = document.querySelectorAll('.item');
+
+        // 2. Use .forEach to loop through every single selected item
+        items.forEach(function(item) {
+            
+            // 3. Attach a 'click' event listener to each individual item
+            item.addEventListener('click', function() {
+                
+                // 4. Use the .remove() method directly on the clicked item to delete it!
+                item.remove();
+                
+            });
+            
+        });
+    </script>
+
+</body>
+</html>
