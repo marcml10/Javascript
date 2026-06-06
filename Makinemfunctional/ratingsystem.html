@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Rating Widget</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .rating-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stars {
+            font-size: 40px;
+            cursor: pointer;
+            color: #ccc; /* Default grey color for unselected stars */
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="rating-card">
+        <h3>Rate your experience</h3>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+    </div>
+
+    <script>
+        // 🛠️ YOUR JAVASCRIPT MISSION:
+        
+        // 1. Select all elements with the class 'star'
+        let star=document.querySelectorAll(".star");
+        
+        // 2. Loop through them using .forEach()
+        star.forEach(function(starr){
+            starr.addEventListener('click', function() {
+                starr.style.color = "#ffd700";
+            })
+        })
+        // 3. Add a click event listener to each star
+        
+        // 4. Inside the click function, change the color of the clicked star to gold!
+        //    Hint: targetStar.style.color = "#ffd700";
+
+    </script>
+</body>
+</html>
