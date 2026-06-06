@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Counter Grid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h2 { color: #333; }
+        .grid {
+            display: flex;
+            gap: 15px;
+        }
+        .box {
+            width: 80px;
+            height: 80px;
+            background-color: #007bff;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s, background-color 0.2s;
+            user-select: none;
+        }
+        .box:hover { background-color: #0056b3; }
+        .box:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+
+    <h2>Click a box to increase its count!</h2>
+    <div class="grid">
+        <div class="box">0</div>
+        <div class="box">0</div>
+        <div class="box">0</div>
+        <div class="box">0</div>
+    </div>
+
+    <script>
+        // 🛠️ YOUR JAVASCRIPT MISSION:
+        
+        // 1. Use document.querySelectorAll to select all elements with the class 'box'
+        let gridBoxes=document.querySelectorAll(".box");
+        // 2. Loop through them using .forEach()
+        gridBoxes.forEach(function(boxes){
+            boxes.addEventListener('click', function(){
+                let boxValue = boxes.textContent;
+                let numValue=Number(boxValue);
+                numValue +=1;
+                boxes.textContent = numValue
+            })
+        })
+        // 3. Inside the loop, add a 'click' event listener to each box
+        
+        // 4. Inside the click function:
+        //    - Grab the current number inside the clicked box using .textContent
+        //    - Convert that text into a real number using Number() or parseInt()
+        //    - Add 1 to that number
+        //    - Update the box's .textContent to show the new number!
+
+    </script>
+</body>
+</html>
