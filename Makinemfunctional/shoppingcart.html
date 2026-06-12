@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Command Center</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .cart-card {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 16px;
+            width: 380px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            border: 1px solid #334155;
+        }
+        h2 { margin-top: 0; text-align: center; color: #38bdf8; font-size: 24px; }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        #item-name { flex: 2; }
+        #item-price { flex: 1; }
+        input {
+            padding: 12px;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            background: #0f172a;
+            color: white;
+            font-size: 14px;
+        }
+        input:focus { outline: 2px solid #38bdf8; border-color: transparent; }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: background 0.2s;
+        }
+        button:hover { background-color: #7dd3fc; }
+        ul { list-style: none; padding: 0; margin: 0; max-height: 200px; overflow-y: auto; }
+        li {
+            background: #334155;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .item-info { display: flex; gap: 15px; }
+        .price-tag { color: #34d399; font-weight: bold; }
+        .del-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            width: auto;
+            margin: 0;
+        }
+        .del-btn:hover { background: #dc2626; }
+        .total-section {
+            border-top: 2px dashed #475569;
+            margin-top: 20px;
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #total-display { color: #34d399; }
+    </style>
+</head>
+<body>
+
+    <div class="cart-card">
+        <h2>Cart Command Center</h2>
+        
+        <div class="input-group">
+            <input type="text" id="item-name" placeholder="Item name...">
+            <input type="number" id="item-price" placeholder="$">
+        </div>
+        <button id="add-btn">Add To Cart</button>
+
+        <ul id="cart-list">
+            </ul>
+
+        <div class="total-section">
+            <span>Total:</span>
+            <span>$<span id="total-display">0</span></span>
+        </div>
+    </div>
+
+    <script>
+        // WRITE YOUR CODE HERE
+        // 1. Target your elements.
+        let itemName = document.querySelector("#item-name");
+        let itemPrice= document.querySelector("#item-price");
+        let addButton= document.querySelector("#add-btn");
+        let cartList= document.querySelector("#cart-list");
+        let totalDisplay = document.querySelector("#total-display");
+        
+        // 2. Track the overall numeric sum variable somewhere.
+        addButton.addEventListener("click", function(){
+            let newList=document.createElement("li");
+            let span=document.createElement("span");
+            let sspan=document.createElement("span");
+            let delButton = document.createElement("button");
+
+            // creating a divison due to issues in the element box 
+            let infoDiv= document.createElement("div");
+            infoDiv.classList.add("item-info");
+
+            infoDiv.append(span);
+            infoDiv.append(sspan);
+            newList.appendChild(infoDiv);
+            newList.appendChild(delButton);
+            cartList.appendChild(newList);
+            
+            // connecting the css block to the html block
+            delButton.classList.add("del-btn");
+
+            // also doing the stuff for the pricing tag 
+            sspan.classList.add("price-tag");
+
+            span.textContent=itemName.value;
+            sspan.textContent=itemPrice.value;
+
+            // turning totalDisplay into numeric value 
+            let totalValue = totalDisplay.textContent;
+            let realTotalValue = Number(totalValue);
+            realTotalValue += Number(itemPrice.value); 
+            totalDisplay.textContent = realTotalValue;
+
+            // storing the value
+            let savedPrice = Number(itemPrice.value);
+
+
+            // reseting values of input and all 
+            itemName.value = "";
+            itemPrice.value = "";
+
+
+            // making delete button functional 
+            delButton.addEventListener("click", function(){
+                let currentTotal = Number(totalDisplay.textContent);
+                currentTotal -= savedPrice ; 
+                totalDisplay.textContent = currentTotal;
+                newList.remove()
+                
+
+            })
+        })
+
+        // 3. Assemble items on the line, calculate numbers, update the DOM.
+        // 4. Adding a delete button 
+    </script>
+</body>
+</html>
