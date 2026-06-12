@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal Tracker Arena</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0b0f19;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .tracker-card {
+            background: #171e30;
+            padding: 40px;
+            border-radius: 20px;
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border: 2px solid #252f48;
+            transition: all 0.3s ease;
+        }
+        h2 { margin: 0 0 10px 0; color: #a5b4fc; }
+        
+        /* The Number Display */
+        #score-display {
+            font-size: 72px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #ffffff;
+            transition: color 0.3s;
+        }
+        
+        /* Control Buttons */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.1s, background 0.2s;
+        }
+        #minus-btn { background-color: #ef4444; color: white; }
+        #minus-btn:hover { background-color: #dc2626; }
+        #plus-btn { background-color: #10b981; color: white; }
+        #plus-btn:hover { background-color: #059669; }
+        button:active { transform: scale(0.9); }
+
+        /* Dynamic Feedback Text */
+        #status-msg {
+            font-size: 14px;
+            color: #94a3b8;
+            min-height: 40px;
+            line-height: 1.4;
+        }
+
+        /* Target indicator */
+        .target-tag {
+            font-size: 12px;
+            background: #252f48;
+            padding: 4px 12px;
+            border-radius: 12px;
+            color: #6366f1;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* CSS Helper Classes for your JS to utilize */
+        .victory-text { color: #10b981 !important; text-shadow: 0 0 15px rgba(16,185,129,0.4); }
+        .victory-card { border-color: #10b981; box-shadow: 0 15px 35px rgba(16,185,129,0.2); }
+    </style>
+</head>
+<body>
+
+    <div class="tracker-card" id="main-card">
+        <span class="target-tag">TARGET: 10</span>
+        <h2>Daily Mission</h2>
+        
+        <div id="score-display">0</div>
+
+        <div class="btn-group">
+            <button id="minus-btn">-</button>
+            <button id="plus-btn">+</button>
+        </div>
+
+        <p id="status-msg">Click buttons to start tracking progress.</p>
+    </div>
+
+    <script>
+        // WRITE YOUR CODE HERE
+        // now i need to select all the buttons that i require to make changes to 
+        let mainCard = document.querySelector("#main-card");
+        let scoreDisplay = document.querySelector("#score-display");
+        let minusButton = document.querySelector("#minus-btn");
+        let plusButton = document.querySelector("#plus-btn");
+        let statusMessage = document.querySelector("#status-msg");
+
+        // basically i am turning the text value into numerics now itself 
+        let finalScore = 0;
+
+        plusButton.addEventListener("click", function(){
+            if (finalScore<=9){
+                finalScore +=1
+                scoreDisplay.textContent = finalScore;
+                if (finalScore == 10){
+                    statusMessage.textContent = "You have achieved your target";
+                    scoreDisplay.classList.add("victory-text");
+                    mainCard.classList.add("victory-card");
+
+                } else {
+                    scoreDisplay.style.color = "#ffffff";
+                    statusMessage.textContent = " you are almost there keep trying";
+                }
+            }    
+        })
+
+        minusButton.addEventListener("click", function(){
+            if (finalScore>=1){
+                finalScore -=1
+                scoreDisplay.textContent = finalScore;
+                if (finalScore == 10){
+                    statusMessage.textContent = "You have achieved your target";
+                } else {
+                    statusMessage.textContent = " you are almost there keep trying";
+                    scoreDisplay.classList.remove("victory-text");
+                    mainCard.classList.remove("victory-card");;
+                }
+            }
+        })
+        </script>
+</body>
+</html>
