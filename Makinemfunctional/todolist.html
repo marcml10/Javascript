@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastery Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e24;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .todo-card {
+            background: #2a2a35;
+            padding: 30px;
+            border-radius: 12px;
+            width: 350px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        h2 { margin-top: 0; text-align: center; color: #00ffd1; }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background: #3b3b4f;
+            color: white;
+            font-size: 16px;
+        }
+        input:focus { outline: 2px solid #00ffd1; }
+        button {
+            padding: 10px 15px;
+            background-color: #00ffd1;
+            color: #1e1e24;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { background-color: #00c8a5; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        li {
+            background: #3b3b4f;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        .del-btn {
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .del-btn:hover { background: #cc0000; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="todo-card">
+        <h2>To do list</h2>
+        <div class="input-group">
+            <input type="text" id="task-input" placeholder="Enter a new mission...">
+            <button id="add-btn">save</button>
+        </div>
+
+        <ul id="task-list">
+            </ul>
+    </div>
+
+    <script>
+        // WRITE ALL YOUR JAVASCRIPT HERE
+        let inpute=document.querySelector("#task-input");
+        let addButton=document.querySelector("#add-btn");
+        let taskList=document.querySelector("#task-list")
+        
+        // Make it so typing a task and clicking "Launch" adds it to the list
+        addButton.addEventListener("click", function(){
+            let newList=document.createElement("li");
+            let span=document.createElement("span");
+            let delButton=document.createElement("button");
+            
+            
+            newList.append(span);
+            newList.append(delButton);
+            taskList.append(newList);
+            span.textContent=inpute.value;
+            delButton.textContent = "delete";
+
+            // tieing the button the css 
+            delButton.classList.add("del-btn");
+
+            // delete button in the list 
+            delButton.addEventListener("click", function(){
+                span.remove()
+                newList.remove()
+            })
+
+
+            inpute.value=" ";
+        })
+        // Make it so clicking the red "Delete" button removes THAT specific task.
+    </script>
+</body>
+</html>
