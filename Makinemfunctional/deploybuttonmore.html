@@ -41,6 +41,7 @@
             taskInput.value="";
             localStorage.setItem("matrixTasks", JSON.stringify(myTasks));
             renderMatrix()
+        });
 
         window.addEventListener("load", function(){
             let stringedData = localStorage.getItem("matrixTasks");
@@ -49,7 +50,7 @@
                 renderMatrix();
             }
         })   
-        });
+
 
         function renderMatrix() {
             matrixList.innerHTML = ""; 
