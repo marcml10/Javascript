@@ -112,10 +112,11 @@
         let finalScore = 0;
 
         plusButton.addEventListener("click", function(){
-            if (finalScore<=9){
-                finalScore +=1
-                scoreDisplay.textContent = finalScore;
-                if (finalScore == 10){
+
+            finalScore +=1
+            scoreDisplay.textContent = finalScore;
+
+                if (finalScore >= 10){
                     statusMessage.textContent = "You have achieved your target";
                     scoreDisplay.classList.add("victory-text");
                     mainCard.classList.add("victory-card");
@@ -123,15 +124,14 @@
                 } else {
                     scoreDisplay.style.color = "#ffffff";
                     statusMessage.textContent = " you are almost there keep trying";
-                }
-            }    
+                }   
         })
 
         minusButton.addEventListener("click", function(){
-            if (finalScore>=1){
+            if (finalScore > 0){
                 finalScore -=1
                 scoreDisplay.textContent = finalScore;
-                if (finalScore == 10){
+                if (finalScore >= 10){
                     statusMessage.textContent = "You have achieved your target";
                 } else {
                     statusMessage.textContent = " you are almost there keep trying";
