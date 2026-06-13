@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Matrix Arena</title>
+    <style>
+        body { font-family: sans-serif; background: #111; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .matrix-card { background: #222; padding: 30px; border-radius: 12px; width: 320px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .input-box { display: flex; gap: 10px; margin-bottom: 20px; }
+        input { flex: 1; padding: 10px; background: #333; border: 1px solid #555; border-radius: 6px; color: #fff; }
+        button { padding: 10px 15px; background: #38bdf8; color: #111; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        ul { list-style: none; padding: 0; text-align: left; }
+        li { background: #333; padding: 10px; border-radius: 6px; margin-bottom: 8px; border-left: 4px solid #38bdf8; }
+    </style>
+</head>
+<body>
+
+    <div class="matrix-card">
+        <h3>Task Matrix</h3>
+        <div class="input-box">
+            <input type="text" id="task-input" placeholder="Enter objective...">
+            <button id="add-task-btn">Deploy</button>
+        </div>
+
+        <ul id="matrix-list"></ul>
+    </div>
+
+    <script>
+        let taskInput = document.querySelector("#task-input");
+        let addTaskBtn = document.querySelector("#add-task-btn");
+        let matrixList = document.querySelector("#matrix-list");
+
+        let myTasks = [];
+
+        addTaskBtn.addEventListener("click", function() {
+            let taskText = taskInput.value;
+            if (taskText === "") return; 
+
+            myTasks.push(taskText);
+            taskInput.value="";
+            localStorage.setItem("matrixTasks", JSON.stringify(myTasks));
+            renderMatrix()
+
+        window.addEventListener("load", function(){
+            let stringedData = localStorage.getItem("matrixTasks");
+            if (stringedData !== null) {
+                myTasks = JSON.parse(stringedData);
+                renderMatrix();
+            }
+        })   
+        });
+
+        function renderMatrix() {
+            matrixList.innerHTML = ""; 
+
+            for (let i = 0; i < myTasks.length; i++) {
+                let newLi = document.createElement("li");
+                newLi.textContent = myTasks[i];
+                matrixList.appendChild(newLi);
+            }
+        }
+    </script>
+</body>
+</html>
