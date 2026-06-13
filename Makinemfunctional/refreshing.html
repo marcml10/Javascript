@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Leaderboard</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #05050a;
+            color: #00ff66;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .leaderboard-card {
+            background: #0f0f1e;
+            padding: 30px;
+            border-radius: 12px;
+            width: 360px;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
+            border: 2px solid #00ff66;
+        }
+        h2 { margin-top: 0; text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            border: 1px solid #00ff66;
+            border-radius: 4px;
+            background: #05050a;
+            color: #00ff66;
+            font-family: inherit;
+            font-size: 14px;
+        }
+        #player-name { flex: 2; }
+        #player-score { flex: 1; }
+        input:focus { outline: none; background: #141428; }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #00ff66;
+            color: #05050a;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-family: inherit;
+            cursor: pointer;
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        button:hover { background-color: #00cc52; }
+        
+        ul { list-style: none; padding: 0; margin: 0; }
+        li {
+            background: #141428;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #00ff66;
+        }
+        .score-val { font-weight: bold; color: #fff; }
+        
+        .clear-btn {
+            background: transparent;
+            color: #ff3333;
+            border: 1px solid #ff3333;
+            margin-top: 10px;
+        }
+        .clear-btn:hover { background: #ff3333; color: #05050a; }
+    </style>
+</head>
+<body>
+
+    <div class="leaderboard-card">
+        <h2>Arcade Scores</h2>
+        
+        <div class="input-group">
+            <input type="text" id="player-name" placeholder="PLAYER TAG">
+            <input type="number" id="player-score" placeholder="SCORE">
+        </div>
+        <button id="submit-btn">Submit Score</button>
+
+        <ul id="score-list">
+            </ul>
+
+        <button id="clear-all" class="clear-btn">Wipe Memory</button>
+    </div>
+
+    <script>
+        let nameInput = document.querySelector("#player-name");
+        let scoreInput = document.querySelector("#player-score");
+        let submitBtn = document.querySelector("#submit-btn");
+        let scoreList = document.querySelector("#score-list");
+        let clearBtn = document.querySelector("#clear-all");
+
+        // 1. PHASE 1: Build the basic "Add to List" structural logic just like you did before.
+        submitBtn.addEventListener("click", function() {
+            let newList = document.createElement("li");
+            let span = document.createElement("span");
+            let sspan = document.createElement("span");
+
+            sspan.textContent = scoreInput.value;
+            span.textContent = nameInput.value;
+            sspan.classList.add("score-val");
+            newList.appendChild(span);
+            newList.appendChild(sspan);
+            scoreList.appendChild(newList);
+            
+            
+            // 2. EXTRA MILESTONE: Save the inputs to LocalStorage here!
+            localStorage.setItem("latestName", nameInput.value);
+            localStorage.setItem("latestScore", scoreInput.value);
+
+            nameInput.value = "";
+            scoreInput.value = "";
+            
+            // Hint: localStorage.setItem("latestName", nameInput.value);
+            // Hint: localStorage.setItem("latestScore", scoreInput.value);
+        });
+
+        // 3. PHASE 2: Make it persistent on refresh!
+        // When the browser window reloads, we want to look into memory and pull out what was left behind.
+        window.addEventListener("load", function() {
+            // Hint: let savedName = localStorage.getItem("latestName");
+            // If savedName actually exists, recreate the list item automatically so it survives the refresh!
+            let savedName = localStorage.getItem("latestName");
+            let savedScore = localStorage.getItem("latestScore");
+
+            let newList = document.createElement("li");
+            let span = document.createElement("span");
+            let sspan = document.createElement("span");
+
+            sspan.textContent = savedScore;
+            span.textContent = savedName;
+            sspan.classList.add("score-val");
+            newList.appendChild(span);
+            newList.appendChild(sspan);
+            scoreList.appendChild(newList);
+
+            nameInput.value = "";
+            scoreInput.value = "";
+
+        });
+
+        // 4. PHASE 3: Clear memory button
+        clearBtn.addEventListener("click", function() {
+            // Hint: localStorage.clear();
+            // Then empty out the visual list on screen!
+            localStorage.clear();
+            scoreList.innerHTML = "";
+        });
+    </script>
+</body>
+</html>
